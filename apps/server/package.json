@@ -1,24 +1,31 @@
 {
   "name": "server",
   "version": "1.0.0",
-  "main": "index.js",
   "scripts": {
-    "compile": "tsc",
-    "dev": "nodemon --exec \"node --loader ts-node/esm src/index.ts\"",
+    "build": "tsc",
+    "dev": "nodemon --watch \"src\" --ext \"ts,js,json\" --exec \"node --loader ts-node/esm src/index.ts\"",
     "test": "echo \"Error: no test specified\" && exit 0"
+  },
+  "exports": {
+    "./datasource": {
+      "types": "./src/datasource.ts",
+      "default": "./src/datasource.js"
+    }
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "description": "the graphql proxy for querying dummy API",
-
   "dependencies": {
+    "@apollo/datasource-rest": "^6.4.1",
     "@apollo/server": "^4.11.3",
     "@repo/graphql": "*",
+    "dotenv": "^16.4.7",
     "graphql": "^16.10.0"
   },
   "type": "module",
   "devDependencies": {
+    "@vercel/ncc": "^0.38.3",
     "nodemon": "^3.1.9",
     "ts-node": "^10.9.2"
   }
