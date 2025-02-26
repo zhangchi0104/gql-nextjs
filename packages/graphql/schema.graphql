@@ -1,0 +1,8 @@
+type Locality {
+}
+
+type Localities {
+  localities: [Locality!]!
+}
+
+type Query {}
