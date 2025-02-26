@@ -1,0 +1,20 @@
+{
+  "name": "@repo/graphql",
+  "description": "Internal GraphQL schema and generated types for both client and server",
+  "type": "module",
+  "scripts": {
+    "dev": "tsc --watch",
+    "build": "tsc"
+  },
+  "exports": {
+    ".": {
+      "types": "./src/index.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "devDependencies": {
+    "@repo/typescript-config": "*",
+    "@repo/eslint-config": "*",
+    "typescript": "latest"
+  }
+}
