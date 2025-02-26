@@ -28,6 +28,7 @@ type Localities {
   # list of localities, cannot be null or array of nulls
   localities: [Locality!]!
 }
+
 type Query {
-  localities: Localities
+  localities(searchword: String!, state: AustralianState): [Locality!]!
 }

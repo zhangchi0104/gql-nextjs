@@ -1,14 +1,13 @@
 { 
   "extends": "@repo/typescript-config/base.json",
+
   "compilerOptions": {
-    "rootDirs": ["src"],
-    "outDir": "dist",
-    "lib": ["es2020"],
-    "target": "es2020",
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "types": ["node"],
     "module": "NodeNext",
     "moduleResolution": "NodeNext",
-    "esModuleInterop": true,
-    "types": ["node"]
+    "esModuleInterop": true
   },
   "ts-node": {
     "esm": true

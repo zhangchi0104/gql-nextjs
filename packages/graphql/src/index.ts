@@ -2,10 +2,10 @@ import { readFileSync } from "node:fs";
 import { join, resolve } from "node:path";
 import { fileURLToPath } from "url";
 import { dirname } from "path";
-
+import "dotenv/config";
 const __filename = fileURLToPath(import.meta.url);
 const _dirname = dirname(__filename);
-export * from "@repo/graphql/__generated__/graphql";
+export * from "./__generated__/graphql.js";
 
 /**
  * Loads the GraphQL schema from the file system.
