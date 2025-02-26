@@ -2,7 +2,12 @@
     "extends": "@repo/typescript-config/base.json",
     "compilerOptions": {
       "outDir": "./dist",
+      "rootDir": "./src",
+      "types": ["node"],
+      "paths": {
+        "@server-types": ["./__generated__/graphql.ts"]
+      }
     },
-    "include": ["src/**/*.ts"],
-    "exclude": ["dist",]
+    "include": ["src/**/*.ts", "../schema.graphql"],
+    "exclude": ["dist", "src/__generated__", "src/**/*.test.ts", "src/**/*.spec.ts"]
 }

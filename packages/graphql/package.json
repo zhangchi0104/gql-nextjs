@@ -1,20 +1,33 @@
 {
   "name": "@repo/graphql",
   "description": "Internal GraphQL schema and generated types for both client and server",
-  "type": "module",
   "scripts": {
-    "dev": "tsc --watch",
-    "build": "tsc"
+    "dev": "mkdir -p ./dist && cp ./schema.graphql ./dist/schema.graphql && tsc --watch",
+    "build": "tsc",
+    "codegen": "graphql-codegen --config codegen.ts"
   },
   "exports": {
     ".": {
       "types": "./src/index.ts",
       "default": "./dist/index.js"
+    },
+    "./__generated__/graphql": {
+      "types": "./src/__generated__/graphql.ts",
+      "default": "./dist/__generated__/graphql.js"
     }
   },
   "devDependencies": {
-    "@repo/typescript-config": "*",
+    "@graphql-codegen/cli": "5.0.5",
+    "@graphql-codegen/typescript": "4.1.5",
+    "@graphql-codegen/typescript-resolvers": "4.4.4",
     "@repo/eslint-config": "*",
-    "typescript": "latest"
+    "@repo/typescript-config": "*",
+    "prettier": "3.5.2",
+    "typescript": "latest",
+    "vitest": "^3.0.7"
+  },
+  "type": "module",
+  "dependencies": {
+    "graphql-tag": "^2.12.6"
   }
 }
