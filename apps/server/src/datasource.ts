@@ -5,10 +5,17 @@ import { AustralianState, Locality } from "@repo/graphql/__generated__/graphql";
  * only for internal use
  */
 interface LocalitiesAPIResponse {
-  localities: {
-    locality: Locality[];
-  };
+  localities:
+    | {
+        locality: Locality[] | Locality;
+      }
+    | "";
 }
+/**
+ * The datasource for the localities API
+ * Please note for simplicity, the data source will not validate the input
+ * the responsibility of validating will be passed to the resolver
+ */
 class LocalitiesAPI extends RESTDataSource {
   override baseURL = process.env.LOCALITIES_API_URL;
   /**
@@ -27,7 +34,7 @@ class LocalitiesAPI extends RESTDataSource {
       {
         params: {
           q: searchword,
-          state,
+          state: state ?? undefined,
         },
         headers: {
           "Content-Type": "application/json",
@@ -35,7 +42,13 @@ class LocalitiesAPI extends RESTDataSource {
         },
       },
     );
-    return response.localities.locality;
+    if (response.localities === "") {
+      return [];
+    }
+    // console.log("response.localities", response.localities);
+    return Array.isArray(response.localities.locality)
+      ? response.localities.locality
+      : [response.localities.locality];
   }
 }
 export default LocalitiesAPI;

@@ -25,7 +25,9 @@
     },
   
     "test": {
-      "dependsOn": ["build", "^test"]
+      "dependsOn": ["build", "^test"],
+      "persistent": false,
+      "cache": false
     }
   }
 }
