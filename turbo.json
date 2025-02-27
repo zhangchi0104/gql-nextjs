@@ -27,7 +27,8 @@
     "test": {
       "dependsOn": ["build", "^test"],
       "persistent": false,
-      "cache": false
+      "cache": false,
+      "env": ["LOCALITIES_API_*", "AUTH_*", "NEXT_PUBLIC_*"] 
     }
   }
 }
