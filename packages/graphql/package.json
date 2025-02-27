@@ -4,7 +4,9 @@
   "scripts": {
     "dev": "mkdir -p ./dist && cp ./schema.graphql ./dist/schema.graphql && tsc --watch",
     "build": "tsc",
-    "codegen": "graphql-codegen --config codegen.ts"
+    "codegen": "graphql-codegen --config codegen.ts",
+    "lint": "eslint --ext .ts .",
+    "test": "vitest"
   },
   "exports": {
     ".": {

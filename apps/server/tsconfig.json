@@ -9,7 +9,7 @@
     "moduleResolution": "NodeNext",
     "esModuleInterop": true
   },
-  "exclude": ["vitest.config.js", "dist/**/*"],
+  "exclude": ["vitest.config.ts", "dist/**/*"],
   "ts-node": {
     "esm": true
   }
