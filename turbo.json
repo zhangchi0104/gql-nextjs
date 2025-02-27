@@ -3,19 +3,32 @@
   "ui": "tui",
   "tasks": {
     "build": {
-      "dependsOn": ["^build"],
+      "dependsOn": ["codegen", "^build"],
       "inputs": ["$TURBO_DEFAULT$", ".env*"],
-      "outputs": [".next/**", "!.next/cache/**"]
+      "outputs": [".next/**", "!.next/cache/**", "dist/**"],
+      "env": ["LOCALITIES_API_*", "AUTH_*", "NEXT_PUBLIC_*"]
     },
+    
     "lint": {
       "dependsOn": ["^lint"]
     },
     "check-types": {
       "dependsOn": ["^check-types"]
     },
+    "codegen": {
+      "dependsOn": ["^codegen"]
+    },
     "dev": {
+      "dependsOn": ["codegen"],
       "cache": false,
       "persistent": true
+    },
+  
+    "test": {
+      "dependsOn": ["build", "^test"],
+      "persistent": false,
+      "cache": false,
+      "env": ["LOCALITIES_API_*", "AUTH_*", "NEXT_PUBLIC_*"] 
     }
   }
 }
