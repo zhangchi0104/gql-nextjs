@@ -14,7 +14,7 @@ export * from "./__generated__/graphql.js";
  * @throws If the file does not exist.
  */
 export const loadTypedefsFromFs = (p?: string): string => {
-  const filePath = p ? p : join(_dirname, "schema.graphql");
+  const filePath = p ? p : join(_dirname, "..", "schema.graphql");
   const content = readFileSync(filePath, { encoding: "utf-8" });
   return content;
 };
