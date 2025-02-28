@@ -6,6 +6,7 @@ enum AustralianState {
   WA
   TAS
   NT
+  ACT
 }
 type Locality {
   # id of the locality
@@ -30,5 +31,9 @@ type Localities {
 }
 
 type Query {
-  localities(searchword: String!, state: AustralianState): [Locality!]!
+  localities(
+    state: AustralianState
+    postcode: String
+    suburb: String
+  ): [Locality!]!
 }

@@ -4,7 +4,8 @@
   "scripts": {
     "build": "tsc",
     "dev": "nodemon --watch \"src\" --ext \"ts,js,json\" --exec \"node --loader ts-node/esm src/index.ts\"",
-    "test": "vitest"
+    "test": "vitest",
+    "lint": "eslint src"
   },
   "exports": {
     "./datasource": {
@@ -27,6 +28,7 @@
   "devDependencies": {
     "@vercel/ncc": "^0.38.3",
     "nodemon": "^3.1.9",
-    "ts-node": "^10.9.2"
+    "ts-node": "^10.9.2",
+    "vitest": "^3.0.7"
   }
 }
