@@ -17,6 +17,7 @@ export type Scalars = {
 };
 
 export enum AustralianState {
+  Act = 'ACT',
   Nsw = 'NSW',
   Nt = 'NT',
   Qld = 'QLD',

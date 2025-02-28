@@ -1,5 +1,8 @@
 import { RESTDataSource } from "@apollo/datasource-rest";
-import { AustralianState, Locality } from "@repo/graphql/__generated__/graphql";
+import {
+  AustralianState,
+  Locality,
+} from "@repo/graphql/__generated__/graphql-server";
 /**
  * The response from the REST API
  * only for internal use
