@@ -1,26 +1,30 @@
+"use client";
+
 import { DetailedHTMLProps, FormHTMLAttributes } from "react";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "../ui/select";
+
 import { FormField } from "./form-field";
 import FormLabel from "./form-label";
 import { cn } from "~/lib/utils";
+import StateSelector from "./state-selector";
+import useValidateLocality from "./hooks";
+import ErrorMessage from "./error-message";
+import VerificationResult from "./verification-result";
 
 const LocalityForm = ({
   className,
   ...props
 }: DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement>, HTMLFormElement>) => {
+  const { state, formAction, isPending } = useValidateLocality();
+  const { validationState, errors, verificationMessage } = state;
+  // const [isDirty, setIsDirty] = useState(false);
   return (
     <form
       data-testid="locality-form__form"
       className={cn("space-y-4", className)}
       {...props}
+      action={formAction}
     >
       <FormField data-testid="locality-form__suburb">
         <FormLabel htmlFor="locality-form__suburb">Suburb</FormLabel>
@@ -30,6 +34,7 @@ const LocalityForm = ({
           name="suburb"
           type="text"
         />
+        <ErrorMessage className="relative -top-1">{errors.suburb}</ErrorMessage>
       </FormField>
       <div className="flex  flex-row gap-8">
         <FormField className="flex-1" data-testid="locality-form__postcode">
@@ -40,27 +45,28 @@ const LocalityForm = ({
             name="postcode"
             type="number"
           />
+          <ErrorMessage className="relative -top-1">
+            {errors.postcode}
+          </ErrorMessage>
         </FormField>
         <FormField className="flex-1" data-testid="locality-form__state">
           <FormLabel htmlFor="locality-form__state">State</FormLabel>
-          <Select name="state">
-            <SelectTrigger id="locality-form__state">
-              <SelectValue placeholder="Select a state" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="NSW">NSW</SelectItem>
-              <SelectItem value="VIC">VIC</SelectItem>
-              <SelectItem value="QLD">QLD</SelectItem>
-              <SelectItem value="SA">SA</SelectItem>
-            </SelectContent>
-          </Select>
+          <StateSelector />
+          <ErrorMessage className="relative -top-1">
+            {errors.state}
+          </ErrorMessage>
         </FormField>
       </div>
+
       <FormField data-testid="locality-form__submit">
-        <Button type="submit" className="w-full mt-4">
+        <Button disabled={isPending} type="submit" className="w-full mt-4">
           Validate Now
         </Button>
       </FormField>
+      <VerificationResult
+        status={validationState}
+        message={verificationMessage ?? ""}
+      />
     </form>
   );
 };

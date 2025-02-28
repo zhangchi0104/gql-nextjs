@@ -1,7 +1,7 @@
 import { test, expect, describe, beforeAll } from "vitest";
 import { loadTypedefsFromFs } from "./index";
 import { writeFileSync, unlinkSync } from "fs";
-import { join, resolve } from "path";
+
 const SCHEMA_GRAPHQL_CONTENT = `enum AustralianState {
   NSW
   VIC

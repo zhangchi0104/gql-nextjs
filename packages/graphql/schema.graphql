@@ -6,6 +6,7 @@ enum AustralianState {
   WA
   TAS
   NT
+  ACT
 }
 type Locality {
   # id of the locality
