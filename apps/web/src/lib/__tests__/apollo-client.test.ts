@@ -1,6 +1,6 @@
 import { it, expect, describe } from "vitest";
 import { validateLocality } from "../apollo-client";
-import { AustralianState, Localities, Locality } from "@repo/graphql";
+import { AustralianState, Locality } from "@repo/graphql";
 import { MockLink, MockedResponse } from "@apollo/client/testing";
 import { InMemoryCache } from "@apollo/client/cache";
 import { ApolloClient } from "@apollo/client";
