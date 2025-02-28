@@ -16,7 +16,8 @@
       "dependsOn": ["^check-types"]
     },
     "codegen": {
-      "dependsOn": ["^codegen"]
+     
+      "cache": false
     },
     "dev": {
       "dependsOn": ["codegen"],

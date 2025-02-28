@@ -31,5 +31,9 @@ type Localities {
 }
 
 type Query {
-  localities(searchword: String!, state: AustralianState): [Locality!]!
+  localities(
+    state: AustralianState
+    postcode: String
+    suburb: String
+  ): [Locality!]!
 }

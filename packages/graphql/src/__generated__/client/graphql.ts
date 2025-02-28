@@ -50,17 +50,19 @@ export type Query = {
 
 
 export type QueryLocalitiesArgs = {
-  searchword: Scalars['String']['input'];
+  postcode?: InputMaybe<Scalars['String']['input']>;
   state?: InputMaybe<AustralianState>;
+  suburb?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type LocalityQueryVariables = Exact<{
-  searchWord: Scalars['String']['input'];
   state?: InputMaybe<AustralianState>;
+  postcode?: InputMaybe<Scalars['String']['input']>;
+  suburb?: InputMaybe<Scalars['String']['input']>;
 }>;
 
 
 export type LocalityQuery = { __typename?: 'Query', localities: Array<{ __typename?: 'Locality', postcode: number, location: string, state: AustralianState }> };
 
 
-export const LocalityDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"Locality"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"searchWord"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"state"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"AustralianState"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"localities"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"searchword"},"value":{"kind":"Variable","name":{"kind":"Name","value":"searchWord"}}},{"kind":"Argument","name":{"kind":"Name","value":"state"},"value":{"kind":"Variable","name":{"kind":"Name","value":"state"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"postcode"}},{"kind":"Field","name":{"kind":"Name","value":"location"}},{"kind":"Field","name":{"kind":"Name","value":"state"}}]}}]}}]} as unknown as DocumentNode<LocalityQuery, LocalityQueryVariables>;
+export const LocalityDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"Locality"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"state"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"AustralianState"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"postcode"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"suburb"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"localities"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"state"},"value":{"kind":"Variable","name":{"kind":"Name","value":"state"}}},{"kind":"Argument","name":{"kind":"Name","value":"postcode"},"value":{"kind":"Variable","name":{"kind":"Name","value":"postcode"}}},{"kind":"Argument","name":{"kind":"Name","value":"suburb"},"value":{"kind":"Variable","name":{"kind":"Name","value":"suburb"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"postcode"}},{"kind":"Field","name":{"kind":"Name","value":"location"}},{"kind":"Field","name":{"kind":"Name","value":"state"}}]}}]}}]} as unknown as DocumentNode<LocalityQuery, LocalityQueryVariables>;

@@ -31,7 +31,11 @@ class LocalitiesAPI extends RESTDataSource {
     searchword: string,
     state?: AustralianState,
   ): Promise<Locality[]> {
-    console.log("/GET /postcode/search.json");
+    process.stderr.write(
+      `GET /postcode/search.json?q=${searchword}` +
+        (state ? `&state=${state}` : "" + "\t"),
+    );
+    const start = process.hrtime();
     const response = await this.get<LocalitiesAPIResponse>(
       `/${process.env.LOCALITIES_API_STAGE ?? "staging"}/postcode/search.json`,
       {
@@ -45,10 +49,12 @@ class LocalitiesAPI extends RESTDataSource {
         },
       },
     );
+    const end = process.hrtime(start);
+    process.stderr.write(`${end[0]}s ${end[1] / 1000000}ms\n`);
     if (response.localities === "") {
       return [];
     }
-    // console.log("response.localities", response.localities);
+
     return Array.isArray(response.localities.locality)
       ? response.localities.locality
       : [response.localities.locality];
