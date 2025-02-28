@@ -6,7 +6,7 @@
       "dependsOn": ["codegen", "^build"],
       "inputs": ["$TURBO_DEFAULT$", ".env*"],
       "outputs": [".next/**", "!.next/cache/**", "dist/**"],
-      "env": ["LOCALITIES_API_*", "AUTH_*", "NEXT_PUBLIC_*"]
+      "env": ["LOCALITIES_API_*", "AUTH_*", "NEXT_PUBLIC_*", "APOLLO_SERVER_URL"]
     },
     
     "lint": {
@@ -16,12 +16,14 @@
       "dependsOn": ["^check-types"]
     },
     "codegen": {
-      "dependsOn": ["^codegen"]
+     
+      "cache": false
     },
     "dev": {
       "dependsOn": ["codegen"],
       "cache": false,
-      "persistent": true
+      "persistent": true,
+      "env": ["LOCALITIES_API_*", "AUTH_*", "NEXT_PUBLIC_*", "APOLLO_SERVER_URL"]
     },
   
     "test": {

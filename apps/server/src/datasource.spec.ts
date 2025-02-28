@@ -32,7 +32,7 @@ describe("LocalitiesAPI", () => {
       AustralianState.Vic,
     );
     expect(localities).toBeDefined();
-    console.log("localities", localities);
+
     expect(localities.length).toBeGreaterThan(0);
   });
 });
