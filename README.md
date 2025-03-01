@@ -13,8 +13,13 @@ npm install
 3. start dev server
 
 ```sh
+npm run codegen
 npm run dev
 ```
+
+4. Access from the browser via http://localhost:3000
+
+- NOTE: you will need to sign in with `AUTH_DUMMY_USERNAME` and `AUTH_DUMMY_PASSWORD` you set in your `app/web/.env`
 
 ## What's inside?
 
