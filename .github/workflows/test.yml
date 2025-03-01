@@ -7,8 +7,8 @@ on:
       - dev
 
 jobs:
-  test:
-    name: test
+  unit-test:
+    name: Unit Test
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -23,7 +23,7 @@ jobs:
         run: npm ci
 
       - name: Run tests
-        run: npm test
+        run: npm run test:unit
         env:
           LOCALITIES_API_URL: ${{ secrets.LOCALITIES_API_URL }}
           LOCALITIES_API_KEY: ${{ secrets.LOCALITIES_API_KEY }}
@@ -34,3 +34,26 @@ jobs:
           AUTH_DUMMY_PASSWORD: ${{ secrets.AUTH_DUMMY_PASSWORD }}
           AUTH_ISSUER: ${{ vars.AUTH_ISSUER }}
           AUTH_AUDIENCE: ${{ vars.AUTH_AUDIENCE }}
+
+  e2e-test:
+    needs: unit-test
+    name: E2E Test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+      - name: Install dependencies
+        run: npm ci
+      - name: Install Playwright Browsers
+        run: npx playwright install --with-deps
+      - name: Run Playwright tests
+        run: npm run test:e2e
+      - uses: actions/upload-artifact@v4
+        if: ${{ !cancelled() }}
+        with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 30
