@@ -1,12 +1,15 @@
-import { ApolloServer } from "@apollo/server";
+import { ApolloServer, BaseContext } from "@apollo/server";
 import { Resolvers } from "@repo/graphql";
 import { loadTypedefsFromFs } from "@repo/graphql";
 import LocalitiesAPI from "./datasource.js";
 import { GraphQLError } from "graphql";
 import { verifyJwt } from "./auth.js";
 import { startStandaloneServer } from "@apollo/server/standalone";
-
-interface AppContext {
+import {
+  startServerAndCreateLambdaHandler,
+  handlers,
+} from "@as-integrations/aws-lambda";
+interface AppContext extends BaseContext {
   authenticated: boolean;
   localitiesAPI: LocalitiesAPI;
 }
@@ -45,7 +48,11 @@ const resolvers: Resolvers<AppContext> = {
     },
   },
 };
-
+export const createApolloServer = () =>
+  new ApolloServer({
+    typeDefs,
+    resolvers,
+  });
 export const createStandaloneServer = async ({
   port = 0,
 }: {
@@ -90,3 +97,5 @@ export const createStandaloneServer = async ({
   });
   return { url, server };
 };
+
+export const createLambdaHandler = async () => {};
