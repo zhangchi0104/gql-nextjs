@@ -65,11 +65,11 @@ const initialState: LocalityFormState = {
 };
 
 const useValidateLocality = () => {
-  const [formKey, setFormKey] = useState(0);
+  const [isDirty, setIsDirty] = useState(false);
   const [state, formAction, isPending] = useActionState<
     LocalityFormState,
     FormData
   >(handleSubmitForm, initialState);
-  return { state, formAction, isPending };
+  return { state, formAction, isPending, isDirty, setIsDirty };
 };
 export default useValidateLocality;
