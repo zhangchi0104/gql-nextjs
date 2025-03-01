@@ -1,10 +1,7 @@
 import { readFileSync } from "node:fs";
-import { join } from "node:path";
-import { fileURLToPath } from "url";
-import { dirname } from "path";
+
 import "dotenv/config";
-const __filename = fileURLToPath(import.meta.url);
-const _dirname = dirname(__filename);
+
 export * from "./__generated__/graphql-server.js";
 
 /**
@@ -14,7 +11,7 @@ export * from "./__generated__/graphql-server.js";
  * @throws If the file does not exist.
  */
 export const loadTypedefsFromFs = (p?: string): string => {
-  const filePath = p ? p : join(_dirname, "..", "schema.graphql");
+  const filePath = p ? p : "schema.graphql";
   const content = readFileSync(filePath, { encoding: "utf-8" });
   return content;
 };
