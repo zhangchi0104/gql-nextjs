@@ -2,7 +2,11 @@
     "extends": "@repo/typescript-config/base.json",
     "compilerOptions": {
       "outDir": "./dist",
+      "rootDir": "./src",
+      "types": ["node"],
+      "module": "ES2020",
+      "moduleResolution": "node10",
     },
-    "include": ["src/**/*.ts"],
-    "exclude": ["dist",]
+    "include": ["src/**/*.ts", "../schema.graphql"],
+    "exclude": ["dist", "src/**/*.test.ts", "src/**/*.spec.ts", "vitest.config.ts"]
 }

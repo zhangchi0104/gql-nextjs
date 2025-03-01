@@ -1,8 +1,39 @@
+enum AustralianState {
+  NSW
+  VIC
+  QLD
+  SA
+  WA
+  TAS
+  NT
+  ACT
+}
 type Locality {
+  # id of the locality
+  id: Int!
+  # category of the locality, only "Delivery Area"
+  category: String!
+  # latitude of the locality
+  latitude: Float!
+  # name of the locality
+  location: String!
+  # longitude of the locality
+  longitude: Float!
+  # 4-digit Australian postcode
+  postcode: Int!
+  # state of the locality
+  state: AustralianState!
 }
 
 type Localities {
+  # list of localities, cannot be null or array of nulls
   localities: [Locality!]!
 }
 
-type Query {}
+type Query {
+  localities(
+    state: AustralianState
+    postcode: String
+    suburb: String
+  ): [Locality!]!
+}

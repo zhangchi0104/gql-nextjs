@@ -3,19 +3,51 @@
   "ui": "tui",
   "tasks": {
     "build": {
-      "dependsOn": ["^build"],
+      "dependsOn": ["codegen", "^build"],
       "inputs": ["$TURBO_DEFAULT$", ".env*"],
-      "outputs": [".next/**", "!.next/cache/**"]
+      "outputs": [".next/**", "!.next/cache/**", "dist/**"],
+      "env": ["LOCALITIES_API_*", "AUTH_*", "NEXT_PUBLIC_*", "APOLLO_SERVER_URL"]
     },
+    
     "lint": {
       "dependsOn": ["^lint"]
     },
     "check-types": {
       "dependsOn": ["^check-types"]
     },
+    "codegen": {
+      "cache": false
+    },
     "dev": {
+      "dependsOn": ["codegen"],
       "cache": false,
-      "persistent": true
+      "persistent": true,
+      "env": ["LOCALITIES_API_*", "AUTH_*", "NEXT_PUBLIC_*", "APOLLO_SERVER_URL"]
+    },
+    "preview": {
+      "dependsOn": ["build"],
+      "cache": false,
+      "persistent": true,
+      "env": ["LOCALITIES_API_*", "AUTH_*", "NEXT_PUBLIC_*", "APOLLO_SERVER_URL"]
+    },
+  
+    "test": {
+      "dependsOn": ["build", "^test"],
+      "persistent": false,
+      "cache": false,
+      "env": ["LOCALITIES_API_*", "AUTH_*", "NEXT_PUBLIC_*", "APOLLO_SERVER_URL"] 
+    },
+    "test:e2e": {
+      "dependsOn": ["build", "^test:e2e"],
+      "persistent": false,
+      "cache": false,
+      "env": ["LOCALITIES_API_*", "AUTH_*", "NEXT_PUBLIC_*", "APOLLO_SERVER_URL"] 
+    },
+    "test:unit": {
+      "dependsOn": ["build", "^test:unit"],
+      "persistent": false,
+      "cache": false,
+      "env": ["LOCALITIES_API_*", "AUTH_*", "NEXT_PUBLIC_*", "APOLLO_SERVER_URL"] 
     }
   }
 }
