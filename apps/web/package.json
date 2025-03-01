@@ -10,7 +10,7 @@
     "lint": "next lint",
     "test:unit": "vitest --exclude e2e/**/*",
     "test:e2e": "playwright test",
-    "test": "vitest"
+    "test": "vitest --exclude e2e/**/* && playwright test"
   },
   "dependencies": {
     "@apollo/client": "^3.13.1",

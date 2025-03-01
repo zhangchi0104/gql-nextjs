@@ -27,3 +27,10 @@ jobs:
         env:
           LOCALITIES_API_URL: ${{ secrets.LOCALITIES_API_URL }}
           LOCALITIES_API_KEY: ${{ secrets.LOCALITIES_API_KEY }}
+          LOCALITIES_API_STAGE: ${{ vars.LOCALITIES_API_STAGE }}
+          AUTH_SECRET: ${{ secrets.AUTH_SECRET }}
+          AUTH_JWT_SECRET: ${{ secrets.AUTH_JWT_SECRET }}
+          AUTH_DUMMY_USERNAME: ${{ secrets.AUTH_DUMMY_USERNAME }}
+          AUTH_DUMMY_PASSWORD: ${{ secrets.AUTH_DUMMY_PASSWORD }}
+          AUTH_ISSUER: ${{ vars.AUTH_ISSUER }}
+          AUTH_AUDIENCE: ${{ vars.AUTH_AUDIENCE }}
