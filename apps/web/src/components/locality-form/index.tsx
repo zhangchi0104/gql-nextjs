@@ -16,8 +16,13 @@ const LocalityForm = ({
   className,
   ...props
 }: DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement>, HTMLFormElement>) => {
-  const { state, formAction, isPending } = useValidateLocality();
-  const { validationState, errors, verificationMessage } = state;
+  const { state, formAction, isPending, isDirty, setIsDirty } =
+    useValidateLocality();
+  const {
+    serverValidationState: validationState,
+    errors,
+    verificationMessage,
+  } = state;
   // const [isDirty, setIsDirty] = useState(false);
   return (
     <form
@@ -25,48 +30,77 @@ const LocalityForm = ({
       className={cn("space-y-4", className)}
       {...props}
       action={formAction}
+      onSubmit={() => setIsDirty(false)}
     >
-      <FormField data-testid="locality-form__suburb">
+      <FormField>
         <FormLabel htmlFor="locality-form__suburb">Suburb</FormLabel>
         <Input
+          onChange={() => setIsDirty(true)}
           placeholder="Sydney"
           id="locality-form__suburb"
+          data-testid="locality-form__suburb"
           name="suburb"
           type="text"
         />
-        <ErrorMessage className="relative -top-1">{errors.suburb}</ErrorMessage>
+        {!isDirty && (
+          <ErrorMessage
+            className="relative -top-1"
+            dataTestId="locality-form__suburb-error"
+          >
+            {errors.suburb}
+          </ErrorMessage>
+        )}
       </FormField>
       <div className="flex  flex-row gap-8">
-        <FormField className="flex-1" data-testid="locality-form__postcode">
+        <FormField className="flex-1">
           <FormLabel htmlFor="locality-form__postcode">Postcode</FormLabel>
           <Input
+            onChange={() => setIsDirty(true)}
             placeholder="2000"
             id="locality-form__postcode"
+            data-testid="locality-form__postcode"
             name="postcode"
             type="number"
           />
-          <ErrorMessage className="relative -top-1">
-            {errors.postcode}
-          </ErrorMessage>
+          {!isDirty && (
+            <ErrorMessage
+              className="relative -top-1"
+              dataTestId="locality-form__postcode-error"
+            >
+              {errors.postcode}
+            </ErrorMessage>
+          )}
         </FormField>
-        <FormField className="flex-1" data-testid="locality-form__state">
+        <FormField className="flex-1">
           <FormLabel htmlFor="locality-form__state">State</FormLabel>
-          <StateSelector />
-          <ErrorMessage className="relative -top-1">
-            {errors.state}
-          </ErrorMessage>
+          <StateSelector onChange={() => setIsDirty(true)} />
+          {!isDirty && (
+            <ErrorMessage
+              className="relative -top-1"
+              dataTestId="locality-form__state-error"
+            >
+              {errors.state}
+            </ErrorMessage>
+          )}
         </FormField>
       </div>
 
-      <FormField data-testid="locality-form__submit">
-        <Button disabled={isPending} type="submit" className="w-full mt-4">
+      <FormField>
+        <Button
+          disabled={isPending}
+          type="submit"
+          className="w-full mt-4"
+          data-testid="locality-form__submit"
+        >
           Validate Now
         </Button>
       </FormField>
-      <VerificationResult
-        status={validationState}
-        message={verificationMessage ?? ""}
-      />
+      {!isDirty && (
+        <VerificationResult
+          status={validationState}
+          message={verificationMessage ?? ""}
+        />
+      )}
     </form>
   );
 };

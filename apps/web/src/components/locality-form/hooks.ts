@@ -1,7 +1,7 @@
 // import { useFormAction } from "react-dom";
 
 import { AustralianState } from "@repo/graphql";
-import { useActionState } from "react";
+import { useActionState, useState } from "react";
 import { validateLocality } from "~/lib/apollo-client";
 
 interface LocalityValidationErrors {
@@ -11,7 +11,7 @@ interface LocalityValidationErrors {
   validation?: string;
 }
 interface LocalityFormState {
-  validationState: "pending" | "success" | "error";
+  serverValidationState: "pending" | "success" | "error";
   errors: LocalityValidationErrors;
   verificationMessage?: string;
 }
@@ -41,7 +41,7 @@ const handleSubmitForm = async (
 
   if (errorDraft.state || errorDraft.suburb || errorDraft.postcode) {
     return {
-      validationState: "error",
+      serverValidationState: "pending",
       errors: errorDraft,
     };
   }
@@ -52,22 +52,24 @@ const handleSubmitForm = async (
   );
 
   return {
-    validationState: verifcationResult.status === "ok" ? "success" : "error",
+    serverValidationState:
+      verifcationResult.status === "ok" ? "success" : "error",
     errors: {},
     verificationMessage: verifcationResult.message,
   };
 };
 
 const initialState: LocalityFormState = {
-  validationState: "pending",
+  serverValidationState: "pending",
   errors: {},
 };
 
 const useValidateLocality = () => {
+  const [isDirty, setIsDirty] = useState(false);
   const [state, formAction, isPending] = useActionState<
     LocalityFormState,
     FormData
   >(handleSubmitForm, initialState);
-  return { state, formAction, isPending };
+  return { state, formAction, isPending, isDirty, setIsDirty };
 };
 export default useValidateLocality;

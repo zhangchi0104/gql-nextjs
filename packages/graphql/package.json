@@ -6,6 +6,7 @@
     "build": "tsc",
     "codegen": "graphql-codegen --config codegen.ts",
     "lint": "eslint --ext .ts .",
+    "test:unit": "vitest --exclude e2e/**/*",
     "test": "vitest"
   },
   "exports": {
