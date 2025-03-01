@@ -3,7 +3,10 @@
   "version": "1.0.0",
   "scripts": {
     "build": "tsc",
+    "preview": "node --loader ts-node/esm src/index.ts",
     "dev": "nodemon --watch \"src\" --ext \"ts,js,json\" --exec \"node --loader ts-node/esm src/index.ts\"",
+    "test:unit": "vitest --exclude e2e/",
+    "test:e2e": "vitest e2e/",
     "test": "vitest",
     "lint": "eslint src"
   },
@@ -22,7 +25,8 @@
     "@apollo/server": "^4.11.3",
     "@repo/graphql": "*",
     "dotenv": "^16.4.7",
-    "graphql": "^16.10.0"
+    "graphql": "^16.10.0",
+    "jose": "^6.0.8"
   },
   "type": "module",
   "devDependencies": {

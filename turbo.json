@@ -16,7 +16,6 @@
       "dependsOn": ["^check-types"]
     },
     "codegen": {
-     
       "cache": false
     },
     "dev": {
@@ -25,12 +24,30 @@
       "persistent": true,
       "env": ["LOCALITIES_API_*", "AUTH_*", "NEXT_PUBLIC_*", "APOLLO_SERVER_URL"]
     },
+    "preview": {
+      "dependsOn": ["build"],
+      "cache": false,
+      "persistent": true,
+      "env": ["LOCALITIES_API_*", "AUTH_*", "NEXT_PUBLIC_*", "APOLLO_SERVER_URL"]
+    },
   
     "test": {
-      "dependsOn": ["build", "^test"],
+      "dependsOn": ["^test"],
       "persistent": false,
       "cache": false,
-      "env": ["LOCALITIES_API_*", "AUTH_*", "NEXT_PUBLIC_*"] 
+      "env": ["LOCALITIES_API_*", "AUTH_*", "NEXT_PUBLIC_*", "APOLLO_SERVER_URL"] 
+    },
+    "test:e2e": {
+      "dependsOn": ["^test:e2e"],
+      "persistent": false,
+      "cache": false,
+      "env": ["LOCALITIES_API_*", "AUTH_*", "NEXT_PUBLIC_*", "APOLLO_SERVER_URL"] 
+    },
+    "test:unit": {
+      "dependsOn": ["^test:unit"],
+      "persistent": false,
+      "cache": false,
+      "env": ["LOCALITIES_API_*", "AUTH_*", "NEXT_PUBLIC_*", "APOLLO_SERVER_URL"] 
     }
   }
 }

@@ -14,8 +14,8 @@ export async function issueJwt(token: JWT) {
   const newToken = await new SignJWT({ username: token.username })
     .setProtectedHeader({ alg: "HS256" })
     .setExpirationTime(token.exp || "1h")
-    .setIssuer(process.env.AUTH_ISSUER!)
-    .setAudience(process.env.AUTH_AUDIENCE!)
+    .setIssuer(process.env.AUTH_ISSUER || "urn:example:issuer")
+    .setAudience(process.env.AUTH_AUDIENCE || "urn:example:audience")
     .sign(new TextEncoder().encode(process.env.AUTH_JWT_SECRET!));
   return newToken;
 }
@@ -52,7 +52,9 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
           password as string,
           dummyPasswordHash,
         );
-
+        // ideally we would check the username and password against a database
+        // but for now we're just using a dummy username and password
+        // and returns a dummy user id and name
         if (username === process.env.AUTH_DUMMY_USERNAME && result) {
           return { id: "1", name: "Test User" };
         }

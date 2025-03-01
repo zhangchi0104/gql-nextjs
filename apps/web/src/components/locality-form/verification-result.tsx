@@ -16,6 +16,7 @@ const VerificationResult = ({
   }
   return (
     <div
+      data-testid="locality-form__verification-result"
       className={cn(
         "text-sm flex items-center gap-1 flex-row justify-center",
         className,

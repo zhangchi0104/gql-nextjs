@@ -5,7 +5,8 @@ const StateSelector = () => {
         className="text-sm w-full px-3 py-1 rounded-md border-none"
         defaultValue="Select a state"
         name="state"
-        id="state-selector"
+        id="locality-form__state"
+        data-testid="locality-form__state"
       >
         <option
           value="Select a state"
