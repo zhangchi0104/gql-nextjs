@@ -48,6 +48,17 @@
       "persistent": false,
       "cache": false,
       "env": ["LOCALITIES_API_*", "AUTH_*", "NEXT_PUBLIC_*", "APOLLO_SERVER_URL"] 
+    },
+    "build:lambda": {
+      "dependsOn": ["codegen", "^build"],
+      "cache": false,
+      "env": ["LOCALITIES_API_*", "AUTH_*", "NEXT_PUBLIC_*", "APOLLO_SERVER_URL"] 
+    },
+    "deploy": {
+      "dependsOn": ["build:lambda"],
+      "cache": false,
+      "env": ["LOCALITIES_API_*", "AUTH_*", "NEXT_PUBLIC_*", "APOLLO_SERVER_URL"] 
+      
     }
   }
 }
