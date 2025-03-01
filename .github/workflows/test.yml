@@ -61,6 +61,7 @@ jobs:
           AUTH_DUMMY_PASSWORD: ${{ secrets.AUTH_DUMMY_PASSWORD }}
           AUTH_ISSUER: ${{ vars.AUTH_ISSUER }}
           AUTH_AUDIENCE: ${{ vars.AUTH_AUDIENCE }}
+          APOLLO_SERVER_URL: https://localhost:4000/graphql
       - uses: actions/upload-artifact@v4
         if: ${{ !cancelled() }}
         with:
