@@ -6,8 +6,11 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+    "preview": "next start",
     "lint": "next lint",
-    "test": "vitest"
+    "test:unit": "vitest --exclude e2e/**/*",
+    "test:e2e": "playwright test",
+    "test": "vitest --exclude e2e/**/* && playwright test"
   },
   "dependencies": {
     "@apollo/client": "^3.13.1",
@@ -29,6 +32,7 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
+    "@playwright/test": "^1.50.1",
     "@repo/eslint-config": "*",
     "@testing-library/dom": "^10.4.0",
     "@testing-library/react": "^16.2.0",
