@@ -95,7 +95,7 @@ const LocalityForm = ({
           Validate Now
         </Button>
       </FormField>
-      {!isDirty && (
+      {!isPending && (
         <VerificationResult
           status={validationState}
           message={verificationMessage ?? ""}

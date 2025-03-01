@@ -2,22 +2,30 @@
 import {
   ApolloClient,
   createHttpLink,
+  from,
   InMemoryCache,
   NormalizedCacheObject,
 } from "@apollo/client";
-
+import { RetryLink } from "@apollo/client/link/retry";
 import { AustralianState } from "@repo/graphql";
 import { localitiesQuery } from "./queries";
 import { auth } from "../auth";
 export async function createServerSideClient() {
   // since this is a server side function, we can just call auth to get the session
   const session = await auth();
-  const link = createHttpLink({
-    uri: process.env.APOLLO_SERVER_URL!,
-    headers: {
-      Authorization: `Bearer ${session?.accessToken ?? ""}`,
-    },
-  });
+  const link = from([
+    new RetryLink({
+      attempts: {
+        max: 3,
+      },
+    }),
+    createHttpLink({
+      uri: process.env.APOLLO_SERVER_URL!,
+      headers: {
+        Authorization: `Bearer ${session?.accessToken ?? ""}`,
+      },
+    }),
+  ]);
   const client = new ApolloClient({
     link,
     cache: new InMemoryCache(),
