@@ -29,7 +29,7 @@ const handleSubmitForm = async (
 
   const errorDraft = {} as LocalityValidationErrors;
   // local validation, make sure all fields are not empty
-  if (!state) {
+  if (!state.trim()) {
     errorDraft.state = "State is required";
   }
   if (!suburb) {
@@ -37,6 +37,9 @@ const handleSubmitForm = async (
   }
   if (!postcode) {
     errorDraft.postcode = "Postcode is required";
+  }
+  if (postcode && postcode.toString().trim().length !== 4) {
+    errorDraft.postcode = "Postcode must be 4 digits";
   }
 
   if (errorDraft.state || errorDraft.suburb || errorDraft.postcode) {
