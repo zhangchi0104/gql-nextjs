@@ -29,10 +29,10 @@ const handleSubmitForm = async (
 
   const errorDraft = {} as LocalityValidationErrors;
   // local validation, make sure all fields are not empty
-  if (!state.trim()) {
+  if (!state) {
     errorDraft.state = "State is required";
   }
-  if (!suburb) {
+  if (!suburb || !suburb.toString().trim()) {
     errorDraft.suburb = "Suburb is required";
   }
   if (!postcode) {
