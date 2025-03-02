@@ -32,11 +32,14 @@ const handleSubmitForm = async (
   if (!state) {
     errorDraft.state = "State is required";
   }
-  if (!suburb) {
+  if (!suburb || !suburb.toString().trim()) {
     errorDraft.suburb = "Suburb is required";
   }
   if (!postcode) {
     errorDraft.postcode = "Postcode is required";
+  }
+  if (postcode && postcode.toString().trim().length !== 4) {
+    errorDraft.postcode = "Postcode must be 4 digits";
   }
 
   if (errorDraft.state || errorDraft.suburb || errorDraft.postcode) {

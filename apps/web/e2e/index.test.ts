@@ -71,6 +71,18 @@ test.describe("should be able to submit a locality", () => {
     await expect(page.getByTestId("locality-form__state-error")).toBeVisible();
   });
 
+  test("should show error if postcode is not 4 digits", async ({ page }) => {
+    await fillForm(page, {
+      state: AustralianState.Vic,
+      suburb: "Melbourne",
+      postcode: "200",
+    });
+    await page.waitForTimeout(1000);
+    await expect(
+      page.getByTestId("locality-form__postcode-error"),
+    ).toBeVisible();
+  });
+
   test("should show error if there is a mismatch between post code and suburb", async ({
     page,
   }) => {
